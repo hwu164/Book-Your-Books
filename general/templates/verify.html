@@ -1,0 +1,66 @@
+<head>
+    <style>
+    h1 {
+        position: relative; 
+        text-align: center;  
+        top: 45%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 100;
+        font-size: 107px;
+        line-height: 183px;
+        color: #DAD2BC;             
+    } 
+
+    .button {
+        font-family: 'Montserrat', sans-serif;
+        border-radius: 8px;
+        border: none;
+        color: white;
+        padding: 15px 100px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        cursor: pointer;
+        transition-duration: 0.4s;
+        margin: 0;
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    .button1 {
+        fill-opacity: 0;
+        fill: #A99985;
+        color: #DAD2BC; 
+        border: 2px solid #DAD2BC;
+    }
+    .button1:hover {
+        background-color: #DAD2BC;
+        color: #252323;
+    }
+            
+    body {
+        background-color: #252323;
+    }
+            
+    </style>
+</head>
+{% load socialaccount %}
+<body>
+    {% if user.username == "karen" or user.username == "hanna" %}
+    <h1>Verified</h1>
+    <a href="/h/" class="button button1">CONTINUE</a> 
+    {% else %}
+    <h1>Username invalid. Try again</h1>
+    <a href="/login/" class="button button1">RETRY</a> 
+    {% endif%}
+
+
+</body>

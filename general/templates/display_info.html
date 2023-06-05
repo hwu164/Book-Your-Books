@@ -1,0 +1,222 @@
+<style>
+  body {
+      background-color: #252323; 
+      margin-left: 16%;
+  }
+  input[type="date"] { 
+      background: transparent;
+      color: #DAD2BC;
+      font-family: 'Montserrat', sans-serif;
+      font-style: light;
+      font-weight: 100;
+      font-size: 40px;
+      padding: 5px;
+      border: 2px solid #DAD2BC;
+      position: relative;
+      left: 10%;
+      top: 30%;
+
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(100%);
+      
+  }
+  input[type="checkbox"] {
+      accent-color: red;
+      mix-blend-mode: multiply;
+      border: 2px solid #DAD2BC;
+      position: relative;
+      left: 10%;
+      top: 10%;
+  }
+  h1 {
+      color: #DAD2BC;
+      font-family: 'Montserrat', sans-serif;
+      font-style: light;
+      font-weight: 100;
+      font-size: 56px;
+      position: relative;
+      text-align: center;
+      top: 8%;
+  }
+  select {
+      color: #DAD2BC;
+      background: transparent;
+      font-family: 'Montserrat', sans-serif;
+      font-style: light;
+      font-weight: 100;
+      font-size: 40px;
+      padding: 5px;
+      border: 2px solid #DAD2BC;
+      position: relative;
+      left: 10%;
+      top: 30%;
+
+  }
+  label {
+      color: #DAD2BC;
+      background: transparent;
+      font-family: 'Montserrat', sans-serif;
+      font-style: light;
+      font-weight: 100;
+      font-size: 40px;
+      padding: 6px;
+      /* border: 2px solid #DAD2BC; */
+      position: relative;
+      top: 30%;
+      left: 10%;
+  }
+  .sidenav {
+      height: 100%; /* Full-height: remove this if you want "auto" height */
+      width: 16%; /* Set the width of the sidebar */
+      position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+      z-index: 1; /* Stay on top */
+      top: 0; /* Stay at the top */
+      left: 0;
+      background-color: rgb(169, 153, 133, 0.52);; /* Black */
+      border-color: #DAD2BC;
+      overflow-x: hidden; /* Disable horizontal scroll */
+      padding-top: 50px;
+  }
+  .sidenav a {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 100;
+      color: #DAD2BC;
+      border-color: #DAD2BC;
+      display: block;
+  }
+  .sidenav a:hover {
+      background-color: #DAD2BC;
+      color: #252323;
+  }
+  .button {
+      font-family: 'Montserrat', sans-serif;
+      font-style: light;
+      font-weight: 100;
+      border: none;
+      padding: 6px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 40px;
+      background-color: transparent;
+      cursor: pointer;
+      transition-duration: 0.4s;
+      position: relative;
+      top: 10%;
+      left: 20%;
+      
+  }
+  .button1 {
+      fill-opacity: 0;
+      fill: #A99985;
+      color: #DAD2BC; 
+      border: 2px solid #DAD2BC;
+  }
+  .button1:hover {
+      background-color: #DAD2BC;
+      color: #252323;
+  }
+  /* Table styling */
+  .center{
+      position: relative;
+      margin-left: auto; 
+      margin-right: auto;
+      top: 25%;
+  }
+  .hoverTable{
+      border-collapse: collapse;
+      width: 60%;
+     
+  }
+  .hoverTable td, th{ 
+      padding: 8px;
+      text-align: center;
+      border: 2px solid rgb(169, 153, 133, 0.52);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 100;
+      font-style: light;
+
+  }
+  .hoverTable tr{
+      color: #DAD2BC;
+  }
+  .hoverTable a{
+      color: #DAD2BC;
+      font-family: 'Montserrat', sans-serif;
+      font-style: light;
+      font-weight: 100;
+  }
+  .hoverTable a:hover{
+      cursor: pointer;
+
+  }
+  .hoverTable tr:hover {
+      /* color: #252323; */
+      background-color: rgb(169, 153, 133, 0.52);
+      transition-duration: 0.3s;
+  }
+  /* body {
+      background-color: #252323;
+  } */
+  .form {
+      position: relative;
+      top: 30%;
+      left: 20%;
+      background-color: #252323;
+      font-size: 40px;
+      font-style: light;
+  }
+
+  .filter {
+      position: relative;
+      top: 15%;
+      /* left: 10%;  */
+  }
+</style>
+    <html>
+    <body>
+    <h1 class="title">Bin Availability for {{selected_date}} Period {{selected_period}}</h1>
+    <table class="hoverTable center">
+        <tr>
+          <th>Bin Name</th>
+          <th>Default Location</th>
+          <th># of Chromebooks</th>
+          <th>Select</th>
+        </tr>
+        <!--<h1>Bins Database</h1>-->
+        {% for item in f_bins %}
+        <tr>
+            <td>{{item.bin_name}}</td>
+            <td>{{item.def_loc}}</td>
+            <td>{{item.num_books}}</td>
+            <!--<td>
+              <button>✓</button>
+            </td>-->
+            <td>
+              <form action="{% url 'book_bin' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="bin_id" value="{{item.bin_id}}">
+                <input type="hidden" name="date" value="{{selected_date}}">
+                <input type="hidden" name="period" value="{{selected_period}}">
+                <input type="hidden" name="username" value="{{request.user.username }}">
+                <button type="submit">✓</button>
+              </form>
+            </td>
+        </tr>
+        {% empty %}
+        <p>No bins available.</p>
+        {% endfor %}
+    </table>
+
+</body>
+<div class="sidenav">
+  <a href="/h/">Home</a>
+  <a href="/book/">Book</a>
+  <a href="/my_bookings/">My Bookings</a>
+  <a href="/h/">Administration</a>
+</div>
+</html>

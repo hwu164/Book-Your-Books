@@ -1,0 +1,190 @@
+<head>
+  <style>
+    
+    .title {
+      position: relative; 
+      text-align: center;  
+      top: 25%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: 100;
+      font-size: 50px;
+      line-height: 183px;
+      color: #DAD2BC;
+    }
+  /* Top navigation styling */
+    .topnav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgb(169, 153, 133, 0.52);
+      border: 1px solid #DAD2BC;
+      overflow: hidden;
+    }
+    .topnav h1 {
+      float: left;
+      color: #DAD2BC;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 40px;
+      font-weight: 100;
+      padding: 0px 30px;
+  
+    }
+    .topnav a {
+      float: right;
+      text-align: center;
+      padding: 40px 30px;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-style: light;
+      font-weight: 100;
+      color: #DAD2BC;
+      font-size: 17px;
+    }
+    .topnav a.signout {
+      float: right;
+      text-align: right;
+      padding: 40px 30px;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-style: light;
+      opacity: 0.7;
+      color: #DAD2BC;
+      font-size: 17px;
+    }
+    .topnav a:hover {
+      background-color: #DAD2BC;
+      color: #252323;
+      transition-duration: 0.4s;
+  
+    }
+    .topnav a.active {
+      background-color: #04AA6D;
+      color: white;
+    }
+  
+  /* Table styling */
+      .center{
+          position: relative;
+          margin-left: auto; 
+          margin-right: auto;
+          top: 15%;
+      }
+      .hoverTable{
+          border-collapse: collapse;
+          width: 60%;
+         
+      }
+      .hoverTable td, th{ 
+          padding: 8px;
+          text-align: center;
+          border: 2px solid rgb(169, 153, 133, 0.52);
+          font-family: 'Montserrat', sans-serif;
+          text-decoration: none;
+  
+      }
+      .hoverTable tr{
+          color: #DAD2BC;
+      }
+      .hoverTable a{
+          color: #DAD2BC;
+          font-family: 'Montserrat', sans-serif;
+          font-style: light;
+          font-weight: 100;
+      }
+      .hoverTable a:hover{
+          cursor: pointer;
+  
+      }
+      .hoverTable tr:hover {
+          /* color: #252323; */
+          background-color: rgb(169, 153, 133, 0.52);
+          transition-duration: 0.3s;
+      }
+      .sidenav {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 16%; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: rgb(169, 153, 133, 0.52);; /* Black */
+        border-color: #DAD2BC;
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 50px;
+    }
+    .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 25px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 100;
+        color: #DAD2BC;
+        border-color: #DAD2BC;
+        display: block;
+    }
+    .sidenav a:hover {
+        background-color: #DAD2BC;
+        color: #252323;
+    }
+    .button {
+        font-family: 'Montserrat', sans-serif;
+        font-style: light;
+        font-weight: 100;
+        border: none;
+        padding: 6px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 40px;
+        background-color: transparent;
+        cursor: pointer;
+        transition-duration: 0.4s;
+        position: relative;
+        top: 10%;
+        left: 20%;
+        
+    }
+      body {
+          background-color: #252323;
+          margin-left: 16%;
+      }
+  </style>
+  
+  </head>
+
+
+
+<h1 class="title">Booking History for {{username}}</h1>
+<table class="hoverTable center" id="myTable">
+    <tr>
+        <th>Date</th>
+        <th>Period</th>
+        <th>Room</th>
+        <th>Bin Name</th>
+        <th># of Chromebooks</th>
+      </tr>
+        {% for b_item in bookings %}
+    <tr>
+      <td>{{b_item.date}}</td>
+      <td>{{b_item.period}}</td>
+      <td>{{b_item.bin.def_loc}}</td>
+      <td>{{b_item.bin.bin_name}}</td>
+      <td>{{b_item.bin.num_books}}</td>
+    </tr>
+    {% empty %}
+    <p>You have no booking history.</p>
+{% endfor %}
+  </table>
+  <div class="sidenav">
+    <a href="/h/">Home</a>
+    <a href="/book/">Book</a>
+    <a href="/my_bookings/">My Bookings</a>
+    <a href="/h/">Administration</a>
+  </div>
+</body>

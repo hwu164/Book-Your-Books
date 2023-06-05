@@ -1,0 +1,7 @@
+<h1>Bins Database</h1>
+{% for item in all %}
+    <strong>{{item.bin_name}}</strong><br/>
+        Default location: {{item.def_loc}}<br/>
+        Number of chromebooks: {{item.num_books}}<br/>
+    <hr>
+{% endfor %}
